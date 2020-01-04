@@ -1,7 +1,6 @@
 import React from 'react'
 import AppBar from '@material-ui/core/AppBar'
 import Drawer from '@material-ui/core/Drawer'
-import Typography from '@material-ui/core/Typography'
 import Button from '@material-ui/core/Button'
 import Hidden from '@material-ui/core/Hidden'
 import IconButton from '@material-ui/core/IconButton'
@@ -10,20 +9,13 @@ import ListItem from '@material-ui/core/ListItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
 import MenuIcon from '@material-ui/icons/Menu'
-import DashboardIcon from '@material-ui/icons/Dashboard'
-import SalesIcon from '@material-ui/icons/Receipt'
-import ExpensesIcon from '@material-ui/icons/ShoppingBasket'
-import ProductsIcon from '@material-ui/icons/Business'
-import OutletsIcon from '@material-ui/icons/AccountTree'
-import CustomersIcon from '@material-ui/icons/People'
-import MarketerIcon from '@material-ui/icons/PersonPin'
-import DistributorIcon from '@material-ui/icons/AcUnit'
-import OperatorIcon from '@material-ui/icons/DeveloperBoard'
-import IssuesIcon from '@material-ui/icons/ErrorOutline'
 import SettingsIcon from '@material-ui/icons/Settings'
 import Toolbar from '@material-ui/core/Toolbar'
+import SearchIcon from '@material-ui/icons/Search'
+import NotificationsIcon from '@material-ui/icons/Notifications'
 import { Link } from 'react-router-dom'
-import { makeStyles, useTheme } from '@material-ui/core/styles'
+import { fade, makeStyles, useTheme } from '@material-ui/core/styles'
+import { Typography, Grid, Badge, InputBase } from '@material-ui/core'
 
 const drawerWidth = 300
 const useStyles = makeStyles(theme => ({
@@ -41,7 +33,8 @@ const useStyles = makeStyles(theme => ({
       width: `calc(100% - ${drawerWidth}px)`,
       marginLeft: drawerWidth,
       height: '56px',
-      background: 'white'
+      background: 'white',
+      color: 'black'
     }
   },
   menuButton: {
@@ -53,6 +46,13 @@ const useStyles = makeStyles(theme => ({
   toolbar: theme.mixins.toolbar,
   drawerPaper: {
     width: drawerWidth
+  },
+  textField: {
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
+    width: 150,
+    color: ' #979797',
+    marginTop: '5px'
   },
   a: {
     '&:active': {
@@ -74,20 +74,61 @@ const useStyles = makeStyles(theme => ({
   },
   logo: {
     margin: '20px 20px 20px 40px'
+  },
+  rightItems: {
+    marginTop: '10px',
+    color: 'black'
+  },
+  button: {
+    textTransform: 'capitalize'
+  },
+  search: {
+    position: 'relative',
+    borderRadius: theme.shape.borderRadius,
+    backgroundColor: fade(theme.palette.common.white, 0.15),
+    '&:hover': {
+      backgroundColor: fade(theme.palette.common.white, 0.25)
+    },
+    marginRight: theme.spacing(2),
+    marginLeft: 0,
+    width: '100%',
+    [theme.breakpoints.up('sm')]: {
+      marginLeft: theme.spacing(3),
+      width: 'auto'
+    }
+  },
+  searchIcon: {
+    width: theme.spacing(7),
+    height: '100%',
+    position: 'absolute',
+    pointerEvents: 'none',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  inputRoot: {
+    color: 'inherit'
+  },
+  inputInput: {
+    padding: theme.spacing(1, 1, 1, 7),
+    transition: theme.transitions.create('width'),
+    width: '100%',
+    [theme.breakpoints.up('md')]: {
+      width: 200
+    }
   }
 }))
-const menuItems = [
-  { label: 'Dashboard', icon: <DashboardIcon />, url: '#' },
-  { label: 'Sales', icon: <SalesIcon />, url: '#' },
-  { label: 'Expenses', icon: <ExpensesIcon />, url: '#' },
-  { label: 'Products', icon: <ProductsIcon />, url: '#' },
-  { label: 'Outlets', icon: <OutletsIcon />, url: '#' },
-  { label: 'Customers', icon: <CustomersIcon />, url: '#' },
-  { label: 'Marketers', icon: <MarketerIcon />, url: '#' },
-  { label: 'Distributors', icon: <DistributorIcon />, url: '#' },
-  { label: 'Operators', icon: <OperatorIcon />, url: '#' },
-  { label: 'Issues', icon: <IssuesIcon />, url: '#' },
-  { label: 'Settings', icon: <SettingsIcon />, url: '#' }
+const paymentItems = [
+  { label: 'All Payments', icon: <SettingsIcon />, url: '#' },
+  { label: 'Reconciled Payments', icon: <SettingsIcon />, url: '#' },
+  { label: 'Un - Reconciled Payments', icon: <SettingsIcon />, url: '#' },
+  { label: 'Manual Settlement', icon: <SettingsIcon />, url: '#' }
+]
+
+const orderItems = [
+  { label: 'All Orders', icon: <SettingsIcon />, url: '#' },
+  { label: 'Pending Orders', icon: <SettingsIcon />, url: '#' },
+  { label: 'Reconciled Orders', icon: <SettingsIcon />, url: '#' }
 ]
 
 function ResponsiveDrawer ({ children }) {
@@ -102,19 +143,44 @@ function ResponsiveDrawer ({ children }) {
 
   const drawer = (
     <div>
-      <img alt='Logo' src={require('../assets/transmonitor_logo.png')} className={classes.logo} />
-      <List>
+      <img
+        alt='Logo'
+        src={require('../assets/transmonitor_logo.png')}
+        className={classes.logo}
+      />
+      <List className={classes.list}>
         <Button className={classes.invoiceButton} variant='contained'>
-            Generate Invoice
+          Generate Invoice
         </Button>
         <ListItem>Main</ListItem>
-        <ListItem
-          button
-          component={Link}
-          to='#'
-        >
-          <ListItemIcon><SettingsIcon /></ListItemIcon>
+        <ListItem button component={Link} to='#'>
+          <ListItemIcon>
+            <SettingsIcon />
+          </ListItemIcon>
           <ListItemText primary='Overview' />
+        </ListItem>
+        <br />
+        <ListItem>Payments</ListItem>
+        {paymentItems.map((item, index) => (
+          <ListItem button key={index} component={Link} to={item.url}>
+            <ListItemIcon>{item.icon}</ListItemIcon>
+            <ListItemText primary={item.label} />
+          </ListItem>
+        ))}
+        <br />
+        <ListItem>Orders</ListItem>
+        {orderItems.map((item, index) => (
+          <ListItem button key={index} component={Link} to={item.url}>
+            <ListItemIcon>{item.icon}</ListItemIcon>
+            <ListItemText primary={item.label} />
+          </ListItem>
+        ))}
+        <br />
+        <ListItem button component={Link} to='#'>
+          <ListItemIcon>
+            <SettingsIcon />
+          </ListItemIcon>
+          <ListItemText primary='Merchant Profile' />
         </ListItem>
       </List>
     </div>
@@ -123,11 +189,37 @@ function ResponsiveDrawer ({ children }) {
   return (
     <div className={classes.root}>
       <AppBar position='fixed' className={classes.appBar}>
-        <Typography align='right'>
-          <Button className={classes.logoutButton} variant='contained'>
-            Logout
-          </Button>
-        </Typography>
+        <Grid container spacing={3}>
+          <Grid item xs={6} md={6}>
+            <div className={classes.search}>
+              <div className={classes.searchIcon}>
+                <SearchIcon />
+              </div>
+              <InputBase
+                placeholder='Search…'
+                classes={{
+                  root: classes.inputRoot,
+                  input: classes.inputInput
+                }}
+                inputProps={{ 'aria-label': 'search' }}
+              />
+            </div>
+          </Grid>
+          <Grid item xs={6} md={6}>
+            <Typography
+              className={classes.rightItems}
+              align='right'
+            > <Button className={classes.button}>Support</Button>
+              <Button className={classes.button}>FAQ</Button>
+              <IconButton aria-label='show 17 new notifications' color='inherit'>
+                <Badge badgeContent={8} color='primary'>
+                  <NotificationsIcon />
+                </Badge>
+              </IconButton>
+              <span>Oluwaleke Ojo</span>
+            </Typography>
+          </Grid>
+        </Grid>
         <Toolbar>
           <IconButton
             color='inherit'
