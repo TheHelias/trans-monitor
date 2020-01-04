@@ -1,9 +1,8 @@
 import React from 'react'
-
+import ResponsiveDrawer from '../components/Drawer'
 function Dashboard () {
   return (
-    <>Dashboard
-    </>
+    <ResponsiveDrawer>oifjk;</ResponsiveDrawer>
   )
 }
 
