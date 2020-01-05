@@ -61,7 +61,8 @@ const useStyles = makeStyles(theme => ({
   },
   content: {
     flexGrow: 1,
-    padding: theme.spacing(3)
+    padding: theme.spacing(3),
+    background: '#e5e5e5'
   },
   invoiceButton: {
     color: 'white',
@@ -76,7 +77,7 @@ const useStyles = makeStyles(theme => ({
     margin: '20px 20px 20px 40px'
   },
   rightItems: {
-    marginTop: '10px',
+    marginTop: '5px',
     color: 'black'
   },
   button: {
@@ -91,6 +92,7 @@ const useStyles = makeStyles(theme => ({
     },
     marginRight: theme.spacing(2),
     marginLeft: 0,
+    marginTop: '10px',
     width: '100%',
     [theme.breakpoints.up('sm')]: {
       marginLeft: theme.spacing(3),
@@ -116,6 +118,9 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.up('md')]: {
       width: 200
     }
+  },
+  profilePicture: {
+    borderRadius: '50%'
   }
 }))
 const paymentItems = [
@@ -216,7 +221,12 @@ function ResponsiveDrawer ({ children }) {
                   <NotificationsIcon />
                 </Badge>
               </IconButton>
-              <span>Oluwaleke Ojo</span>
+              <Button className={classes.button}>Oluwaleke Ojo</Button>
+              <img
+                alt='Logo'
+                src={require('../assets/profile_picture.png')}
+                className={classes.profilePicture}
+              />
             </Typography>
           </Grid>
         </Grid>
