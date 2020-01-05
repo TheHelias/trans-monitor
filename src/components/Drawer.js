@@ -9,7 +9,11 @@ import ListItem from '@material-ui/core/ListItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
 import MenuIcon from '@material-ui/icons/Menu'
-import SettingsIcon from '@material-ui/icons/Settings'
+import AccountBalanceWalletOutlinedIcon from '@material-ui/icons/AccountBalanceWalletOutlined'
+import FiberManualRecordTwoToneIcon from '@material-ui/icons/FiberManualRecordTwoTone'
+import AssignmentOutlinedIcon from '@material-ui/icons/AssignmentOutlined'
+import PermIdentityOutlinedIcon from '@material-ui/icons/PermIdentityOutlined'
+import SpeedIcon from '@material-ui/icons/Speed'
 import Toolbar from '@material-ui/core/Toolbar'
 import SearchIcon from '@material-ui/icons/Search'
 import NotificationsIcon from '@material-ui/icons/NotificationsOutlined'
@@ -127,19 +131,22 @@ const useStyles = makeStyles(theme => ({
   profilePicture: {
     borderRadius: '50%',
     height: '40px'
+  },
+  list: {
+    marginLeft: '15px'
   }
 }))
 const paymentItems = [
-  { label: 'All Payments', icon: <SettingsIcon />, url: '#' },
-  { label: 'Reconciled Payments', icon: <SettingsIcon />, url: '#' },
-  { label: 'Un - Reconciled Payments', icon: <SettingsIcon />, url: '#' },
-  { label: 'Manual Settlement', icon: <SettingsIcon />, url: '#' }
+  { label: 'All Payments', icon: <AccountBalanceWalletOutlinedIcon />, url: '#' },
+  { label: 'Reconciled Payments', icon: <AccountBalanceWalletOutlinedIcon />, url: '#' },
+  { label: 'Un - Reconciled Payments', icon: <AccountBalanceWalletOutlinedIcon />, url: '#' },
+  { label: 'Manual Settlement', icon: <FiberManualRecordTwoToneIcon />, url: '#' }
 ]
 
 const orderItems = [
-  { label: 'All Orders', icon: <SettingsIcon />, url: '#' },
-  { label: 'Pending Orders', icon: <SettingsIcon />, url: '#' },
-  { label: 'Reconciled Orders', icon: <SettingsIcon />, url: '#' }
+  { label: 'All Orders', icon: <AssignmentOutlinedIcon />, url: '#' },
+  { label: 'Pending Orders', icon: <AssignmentOutlinedIcon />, url: '#' },
+  { label: 'Reconciled Orders', icon: <AssignmentOutlinedIcon />, url: '#' }
 ]
 
 function ResponsiveDrawer ({ children }) {
@@ -163,33 +170,33 @@ function ResponsiveDrawer ({ children }) {
         <Button className={classes.invoiceButton} variant='contained'>
           Generate Invoice
         </Button>
-        <ListItem>Main</ListItem>
-        <ListItem button component={Link} to='#'>
+        <ListItem className={classes.list}>Main</ListItem>
+        <ListItem className={classes.list} button component={Link} to='#'>
           <ListItemIcon>
-            <SettingsIcon />
+            <SpeedIcon />
           </ListItemIcon>
           <ListItemText primary='Overview' />
         </ListItem>
         <br />
-        <ListItem>Payments</ListItem>
+        <ListItem className={classes.list}>Payments</ListItem>
         {paymentItems.map((item, index) => (
-          <ListItem button key={index} component={Link} to={item.url}>
+          <ListItem className={classes.list} button key={index} component={Link} to={item.url}>
             <ListItemIcon>{item.icon}</ListItemIcon>
             <ListItemText primary={item.label} />
           </ListItem>
         ))}
         <br />
-        <ListItem>Orders</ListItem>
+        <ListItem className={classes.list}>Orders</ListItem>
         {orderItems.map((item, index) => (
-          <ListItem button key={index} component={Link} to={item.url}>
+          <ListItem className={classes.list} button key={index} component={Link} to={item.url}>
             <ListItemIcon>{item.icon}</ListItemIcon>
             <ListItemText primary={item.label} />
           </ListItem>
         ))}
         <br />
-        <ListItem button component={Link} to='#'>
+        <ListItem className={classes.list} button component={Link} to='#'>
           <ListItemIcon>
-            <SettingsIcon />
+            <PermIdentityOutlinedIcon />
           </ListItemIcon>
           <ListItemText primary='Merchant Profile' />
         </ListItem>
