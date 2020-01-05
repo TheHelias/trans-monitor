@@ -14,13 +14,16 @@ const useStyles = makeStyles(theme => ({
   },
   chartImage: {
     margin: '20px 30px 20px 10px'
+  },
+  paper: {
+    borderRadius: '2px !important'
   }
 }))
 function TransactionPaper (props) {
   const classes = useStyles()
 
   return (
-    <Paper>
+    <Paper className={classes.paper}>
       <Grid container>
         <Grid item xs={8} md={8}>
           <p className={classes.text}>{props.text}</p>
