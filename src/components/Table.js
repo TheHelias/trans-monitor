@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
-import Cancel from '@material-ui/icons/Cancel'
-import CheckBoxIcon from '@material-ui/icons/CheckBox'
+import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord'
 import { makeStyles } from '@material-ui/core/styles'
 import { Box } from '@material-ui/core'
 
@@ -21,63 +20,145 @@ function Table ({ history }) {
       title: '  Item Type',
       field: 'itemType',
       filtering: false,
-      render: rowData =>
-        <>
+      render: rowData => (
+        <span
+          style={{
+            display: 'flex',
+            alignItems: 'center'
+          }}
+        >
           <img
             alt='Logo'
             src={require('../assets/ellipse.png')}
-            style={{ marginRight: '20px' }}
+            style={{ marginRight: '30px' }}
           />
-          <span>{rowData.itemType}</span>
-        </>
+          {rowData.itemType}
+        </span>
+      )
     },
-    { title: 'Price', field: 'price', filtering: false },
-    { title: 'Transaction No', field: 'transactionNo', filtering: false },
-    { title: 'Time', field: 'time', filtering: false },
+    {
+      title: 'Price',
+      field: 'price',
+      filtering: false,
+      cellStyle: {
+        color: '#7F8FA4'
+      }
+    },
+    {
+      title: 'Transaction No',
+      field: 'transactionNo',
+      filtering: false,
+      cellStyle: {
+        color: '#7F8FA4'
+      }
+    },
+    {
+      title: 'Time',
+      field: 'time',
+      filtering: false,
+      cellStyle: {
+        color: '#7F8FA4'
+      }
+    },
     {
       title: ' Status',
       field: 'status',
-      lookup: { Reconciled: 'Reconciled', 'Un-reconciled': 'Un-reconciled', Settled: 'Settled', Unsettled: 'Unsettled' },
+      lookup: {
+        Reconciled: 'Reconciled',
+        'Un-reconciled': 'Un-reconciled',
+        Settled: 'Settled',
+        Unsettled: 'Unsettled'
+      },
       render: rowData => {
         let display = ''
         if (rowData.status === 'Reconciled') {
-          display =
-            <>
-              <Box
-                component={CheckBoxIcon}
-                pt={1}
-                mr={1}
-                style={{ color: 'green' }}
-              />
-              <span>{rowData.status}</span>
-            </>
+          display = (
+            <span
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                color: '#27AE60',
+                border: '1px solid #CCCFD4',
+                borderRadius: '30px',
+                width: '140px',
+                padding: '5px 10px 5px 10px'
+              }}
+            >
+              <Box component={FiberManualRecordIcon} mr={1} width={15} />
+              {rowData.status}
+            </span>
+          )
         } else if (rowData.status === 'Un-reconciled') {
-          display =
-            <>
-              <Box component={Cancel} pt={1} mr={1} style={{ color: 'red' }} />
-              <span>{rowData.status}</span>
-            </>
+          display = (
+            <span
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                color: ' #7F8FA4',
+                border: '1px solid #CCCFD4',
+                borderRadius: '30px',
+                width: '140px',
+                padding: '5px 10px 5px 10px'
+              }}
+            >
+              <Box component={FiberManualRecordIcon} mr={1} width={15} />
+              {rowData.status}
+            </span>
+          )
         } else if (rowData.status === 'Settled') {
-          display =
-            <>
-              <Box component={Cancel} pt={1} mr={1} style={{ color: 'red' }} />
-              <span>{rowData.status}</span>
-            </>
+          display = (
+            <span
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                color: '#27AE60',
+                border: '1px solid #CCCFD4',
+                borderRadius: '30px',
+                width: '140px',
+                padding: '5px 10px 5px 10px'
+              }}
+            >
+              <Box component={FiberManualRecordIcon} width={15} mr={1} />
+              {rowData.status}
+            </span>
+          )
         } else if (rowData.status === 'Unsettled') {
-          display =
-            <>
-              <Box component={Cancel} pt={1} mr={1} style={{ color: 'red' }} />
-              <span>{rowData.status}</span>
-            </>
+          display = (
+            <span
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                color: 'red',
+                border: '1px solid #CCCFD4',
+                borderRadius: '30px',
+                width: '140px',
+                padding: '5px 10px 5px 10px'
+              }}
+            >
+              <Box component={FiberManualRecordIcon} width={15} mr={1} />
+              {rowData.status}
+            </span>
+          )
         } else {
-          display =
-            <>
-              <Box component={Cancel} pt={1} mr={1} style={{ color: 'red' }} />
-              <span>Pending</span>
-            </>
+          display = (
+            <span
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                color: '#EBC315',
+                border: '1px solid #CCCFD4',
+                borderRadius: '30px',
+                width: '140px',
+                padding: '5px 10px 5px 10px'
+              }}
+            >
+              <Box component={FiberManualRecordIcon} width={15} mr={1} />
+              Pending
+            </span>
+          )
         }
 
-        return (<>{display}</>)
+        return <>{display}</>
       }
     }
   ])
@@ -87,7 +168,7 @@ function Table ({ history }) {
       price: '$73430',
       transactionNo: '1234567890',
       time: '12:30',
-      status: 'Unsettled'
+      status: 'Settled'
     },
     {
       itemType: 'Apple Mac Book 15" 250 SSD 12GB',
@@ -173,8 +254,19 @@ function Table ({ history }) {
       columns={columns}
       data={data}
       options={{
-        pageSize: 20,
-        filtering: true
+        pageSize: 10,
+        filtering: true,
+        headerStyle: {
+          backgroundColor: '#EAEEF0',
+          color: '#7F8FA4'
+        },
+        searchFieldStyle: {
+          marginRight: '500px',
+          color: '#787878'
+        }
+      }}
+      localization={{
+        toolbar: { searchPlaceholder: 'Search Payments' }
       }}
     />
   )
