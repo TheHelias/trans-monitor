@@ -66,7 +66,8 @@ const useStyles = makeStyles(theme => ({
   content: {
     flexGrow: 1,
     padding: theme.spacing(3),
-    background: '#e5e5e5'
+    fontFamily: 'Segoe UI',
+    background: '#f5f5f5'
   },
   invoiceButton: {
     color: 'white',

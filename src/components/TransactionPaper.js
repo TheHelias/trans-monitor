@@ -16,6 +16,7 @@ const useStyles = makeStyles(theme => ({
     margin: '20px 30px 20px 10px'
   },
   paper: {
+    boxShadow: 'none !important',
     borderRadius: '2px !important'
   }
 }))
