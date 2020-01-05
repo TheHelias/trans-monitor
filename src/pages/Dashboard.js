@@ -26,12 +26,7 @@ function Dashboard () {
         <Grid item xs={8} md={8}>
           <Chart />
         </Grid>
-        <Grid item xs={4} md={4}>
-          <img
-            alt='Chart'
-            src={require('../assets/small_chart.png')}
-          />
-        </Grid>
+        <Grid item xs={4} md={4} />
       </Grid>
       <br />
       <Table />

@@ -12,7 +12,7 @@ import MenuIcon from '@material-ui/icons/Menu'
 import SettingsIcon from '@material-ui/icons/Settings'
 import Toolbar from '@material-ui/core/Toolbar'
 import SearchIcon from '@material-ui/icons/Search'
-import NotificationsIcon from '@material-ui/icons/Notifications'
+import NotificationsIcon from '@material-ui/icons/NotificationsOutlined'
 import { Link } from 'react-router-dom'
 import { fade, makeStyles, useTheme } from '@material-ui/core/styles'
 import { Typography, Grid, Badge, InputBase } from '@material-ui/core'
@@ -77,11 +77,15 @@ const useStyles = makeStyles(theme => ({
     margin: '20px 20px 20px 40px'
   },
   rightItems: {
+    display: 'flex',
+    justifyContent: 'center',
     marginTop: '5px',
     color: 'black'
   },
   button: {
-    textTransform: 'capitalize'
+    textTransform: 'capitalize',
+    marginLeft: '15px',
+    color: '#647787'
   },
   search: {
     position: 'relative',
@@ -106,7 +110,8 @@ const useStyles = makeStyles(theme => ({
     pointerEvents: 'none',
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    color: '#647787'
   },
   inputRoot: {
     color: 'inherit'
@@ -120,7 +125,8 @@ const useStyles = makeStyles(theme => ({
     }
   },
   profilePicture: {
-    borderRadius: '50%'
+    borderRadius: '50%',
+    height: '40px'
   }
 }))
 const paymentItems = [
@@ -216,7 +222,7 @@ function ResponsiveDrawer ({ children }) {
               align='right'
             > <Button className={classes.button}>Support</Button>
               <Button className={classes.button}>FAQ</Button>
-              <IconButton aria-label='show 17 new notifications' color='inherit'>
+              <IconButton className={classes.button} aria-label='show 17 new notifications' color='inherit'>
                 <Badge badgeContent={8} color='primary'>
                   <NotificationsIcon />
                 </Badge>

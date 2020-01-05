@@ -30,7 +30,7 @@ const data = [
 
 function Chart () {
   return (
-    <Paper style={{ width: '100%', height: 300 }}>
+    <Paper style={{ width: '100%', height: 330 }}>
       <ResponsiveContainer>
         <AreaChart
           data={data}
