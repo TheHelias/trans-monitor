@@ -2,6 +2,8 @@ import React from 'react'
 import ResponsiveDrawer from '../components/Drawer'
 import TransactionPaper from '../components/TransactionPaper'
 import { Grid } from '@material-ui/core'
+import Chart from '../components/Chart'
+import Table from '../components/Table'
 function Dashboard () {
   return (
     <ResponsiveDrawer>
@@ -19,7 +21,20 @@ function Dashboard () {
           <TransactionPaper text='Total Transaction Value' amount='₦4,000,000' />
         </Grid>
       </Grid>
-
+      <br />
+      <Grid container>
+        <Grid item xs={8} md={8}>
+          <Chart />
+        </Grid>
+        <Grid item xs={4} md={4}>
+          <img
+            alt='Chart'
+            src={require('../assets/small_chart.png')}
+          />
+        </Grid>
+      </Grid>
+      <br />
+      <Table />
     </ResponsiveDrawer>
   )
 }
