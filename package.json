@@ -8,7 +8,7 @@
     "@material-ui/pickers": "^3.2.8",
     "material-table": "^1.54.1",
     "material-ui-pickers": "^2.2.4",
-    "node-sass": "^4.13.0",
+    "node-sass": "^7.0.0",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
     "react-router-dom": "^5.1.2",
